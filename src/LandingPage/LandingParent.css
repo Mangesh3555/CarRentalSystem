@@ -17,15 +17,15 @@ body, html {
 
 /* ===== Landing Page Background ===== */
 .landing-background {
-  background-image: url("E:\SPIC COURCE\SEED FINAL PROJECT\myreactapp\public\images\book.jpg");  /* Correct path */
-  background-size: cover;     /* Fit fullscreen */
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;          /* full screen height */
-  width: 100%;
   display: flex;
+  flex-direction: column;       /* Stack content vertically */
+  justify-content: center;      /* Vertical centering */
+  align-items: center;          /* Horizontal centering */
+  min-height: 100vh;
+  width: 100%;
   position: relative;
 }
+
 
 /* ===== Dark Overlay ===== */
 .overlay {
@@ -42,5 +42,6 @@ body, html {
 /* Place navbar and other content above overlay */
 .navbar, .hero-container, .register-box {
   position: relative;
-  z-index: 2;
+  z-index: 2; 
 }
+

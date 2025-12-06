@@ -1,0 +1,55 @@
+.add-variant-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.add-variant-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-variant-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-variant-form label {
+  font-weight: 600;
+}
+
+.add-variant-form input,
+.add-variant-form select,
+.add-variant-form textarea {
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.add-variant-btn {
+  background: #ff6600;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.add-variant-btn:hover {
+  background: #e25500;
+}
+
+.form-message {
+  color: green;
+  font-size: 14px;
+  text-align: center;
+}

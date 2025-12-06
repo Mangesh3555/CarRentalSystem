@@ -1,5 +1,4 @@
 .App {
-  background-image: url("E:\SPIC COURCE\SEED FINAL PROJECT\myreactapp\public\images\book.jpg"); 
   background-size: cover;        /* makes image fit full screen */
   background-position: center;   /* centers the image */
   background-repeat: no-repeat;  /* prevents repeating */

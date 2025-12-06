@@ -243,16 +243,18 @@
   display: flex;
   justify-content: center;
   margin-top: 40px;
+ /* padding-bottom: 5px; */
 }
 
 .center-search-box {
   width: 60%;
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 
 .center-search-box input {
-  width: 100%;
+  width: 20%;
   padding: 12px;
   font-size: 16px;
   border-radius: 8px;

@@ -15,7 +15,6 @@ export default function AdminDashboard() {
         </div>
         <div className="menu-right">
           <p>Register Admin</p>
-          <p>Add Company</p>
           <p>Add Variant</p>
           <p>Variants</p>
           <p>Bookings</p>
