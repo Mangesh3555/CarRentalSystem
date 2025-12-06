@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./AddVarient.css";
 
 export default function AddVariant() {
@@ -15,7 +16,7 @@ export default function AddVariant() {
 
   const [message, setMessage] = useState("");
 
-  const companies = ["Hyundai", "Kia", "Toyota", "Honda"]; // Example companies
+  const companies = ["Hyundai", "Kia", "Toyota", "Honda"];
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -26,10 +27,10 @@ export default function AddVariant() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simple validation
+    // Validation
     for (let key in form) {
       if (!form[key]) {
         setMessage("All fields are required!");
@@ -37,23 +38,49 @@ export default function AddVariant() {
       }
     }
 
-    // API call can be added here to save variant
-    setMessage(`Variant "${form.variantName}" added successfully!`);
+    if (!form.image) {
+      setMessage("Please select an image!");
+      return;
+    }
 
-    // Clear form
-    setForm({
-      variantName: "",
-      company: "",
-      year: "",
-      fuelType: "",
-      seatCapacity: "",
-      rentPerDay: "",
-      ac: "",
-      image: null,
-    });
+    try {
+      const formData = new FormData();
+      formData.append("variantName", form.variantName);
+      formData.append("company", form.company);
+      formData.append("year", form.year);
+      formData.append("fuelType", form.fuelType);
+      formData.append("seatCapacity", form.seatCapacity);
+      formData.append("rentPerDay", form.rentPerDay);
+      formData.append("ac", form.ac);
+      formData.append("image", form.image);
 
-    // Clear file input manually
-    document.getElementById("variantImage").value = "";
+      const response = await axios.post(
+        "http://localhost:8081/api/cars/add",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      setMessage(response.data.message);
+
+      if (response.data.success) {
+        setForm({
+          variantName: "",
+          company: "",
+          year: "",
+          fuelType: "",
+          seatCapacity: "",
+          rentPerDay: "",
+          ac: "",
+          image: null,
+        });
+        document.getElementById("variantImage").value = "";
+      }
+    } catch (error) {
+      console.error("Error uploading variant:", error.response || error);
+      setMessage("Error adding variant! Please try again.");
+    }
   };
 
   return (
@@ -61,51 +88,22 @@ export default function AddVariant() {
       <h2>Add Car Variant</h2>
 
       <form className="add-variant-form" onSubmit={handleSubmit}>
+        <label>Enter Variant Name</label>
+        <input type="text" name="variantName" value={form.variantName} onChange={handleChange} required />
 
-        {/* Variant Name */}
-        <label>Variant Name</label>
-        <input
-          type="text"
-          name="variantName"
-          placeholder="Enter variant name"
-          value={form.variantName}
-          onChange={handleChange}
-          required
-        />
-
-        {/* Company */}
         <label>Company</label>
-        <select
-          name="company"
-          value={form.company}
-          onChange={handleChange}
-          required
-        >
+        <select name="company" value={form.company} onChange={handleChange} required>
           <option value="">Select Company</option>
           {companies.map((c, idx) => (
             <option key={idx} value={c}>{c}</option>
           ))}
         </select>
 
-        {/* Year */}
         <label>Year</label>
-        <input
-          type="number"
-          name="year"
-          placeholder="Enter manufacturing year"
-          value={form.year}
-          onChange={handleChange}
-          required
-        />
+        <input type="number" name="year" value={form.year} onChange={handleChange} required />
 
-        {/* Fuel Type */}
         <label>Fuel Type</label>
-        <select
-          name="fuelType"
-          value={form.fuelType}
-          onChange={handleChange}
-          required
-        >
+        <select name="fuelType" value={form.fuelType} onChange={handleChange} required>
           <option value="">Select Fuel Type</option>
           <option value="Petrol">Petrol</option>
           <option value="Diesel">Diesel</option>
@@ -113,51 +111,24 @@ export default function AddVariant() {
           <option value="Petrol+CNG">Petrol+CNG</option>
         </select>
 
-        {/* Seat Capacity */}
         <label>Seat Capacity</label>
-        <input
-          type="number"
-          name="seatCapacity"
-          placeholder="Enter seat capacity"
-          value={form.seatCapacity}
-          onChange={handleChange}
-          required
-        />
+        <input type="number" name="seatCapacity" value={form.seatCapacity} onChange={handleChange} required />
 
-        {/* Rent Per Day */}
         <label>Rent per Day</label>
-        <input
-          type="number"
-          name="rentPerDay"
-          placeholder="Enter rent per day"
-          value={form.rentPerDay}
-          onChange={handleChange}
-          required
-        />
+        <input type="number" name="rentPerDay" value={form.rentPerDay} onChange={handleChange} required />
 
-        {/* AC */}
-        <label>AC</label>
+        <label>Is AC</label>
         <select name="ac" value={form.ac} onChange={handleChange} required>
           <option value="">Select AC Option</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
 
-        {/* Variant Image */}
-        <label>Variant Image</label>
-        <input
-          type="file"
-          name="image"
-          id="variantImage"
-          accept="image/*"
-          onChange={handleChange}
-          required
-        />
+        <label>Select Variant Image</label>
+        <input type="file" name="image" id="variantImage" accept="image/*" onChange={handleChange} required />
 
-        {/* Message */}
-        {message && <p className="form-message">{message}</p>}
+        {message && <p style={{ color: message.includes("successfully") ? "green" : "red" }}>{message}</p>}
 
-        {/* Submit */}
         <button type="submit" className="add-variant-btn">Add Variant</button>
       </form>
     </div>

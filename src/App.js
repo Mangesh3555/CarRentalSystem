@@ -14,8 +14,8 @@ function App() {
 
   return (
       <div className="App">
-        {/* <AddVariant/> */}
-        <RegisterAdmin/>
+        <AddVariant/>
+        {/* <RegisterAdmin/> */}
         {/* <AdminDashboard/> */}
         {/* <LandingParent/> */}
       </div>
