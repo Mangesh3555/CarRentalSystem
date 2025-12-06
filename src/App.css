@@ -1,0 +1,16 @@
+.App {
+  background-image: url("E:\SPIC COURCE\SEED FINAL PROJECT\myreactapp\public\images\book.jpg"); 
+  background-size: cover;        /* makes image fit full screen */
+  background-position: center;   /* centers the image */
+  background-repeat: no-repeat;  /* prevents repeating */
+  height: 100vh;                 /* full viewport height */
+  width: 100%;                   /* full width */
+  display: flex;
+  flex-direction: column;
+}
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+

@@ -1,0 +1,57 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 50px;
+  z-index: 10;
+  background: transparent; /* optional, to show background image */
+}
+
+.logo {
+  font-size: 35px;
+  font-weight: bold;
+  color: #ff8300;
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  font-weight: bold;
+  color: black;
+}
+
+.menu li {
+  color: #ffffff;   /* change black to white */
+  font-weight: 600;
+}
+.menu li:hover {
+  color: #ff8300;   /* orange hover accent */
+}
+
+
+
+/* Container for login buttons */
+.nav-buttons {
+  display: flex;
+  gap: 20px; /* controls spacing between buttons */
+}
+
+.user-btn, .admin-btn {
+  background: #ff8300;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  color: black;
+  font-size: 14px;
+  transition: transform 0.2s;
+}
+
+.user-btn:hover, .admin-btn:hover {
+  transform: scale(1.05); /* optional hover effect */
+}
