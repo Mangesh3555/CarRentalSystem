@@ -18,9 +18,10 @@ function App() {
         {/* <Register/> */}
         {/* <Variant/> */}
         {/* <AddVariant/> */}
-        <RegisterAdmin/>
+        {/* <RegisterAdmin/>*/}
         {/* <AdminDashboard/> */}
-        {/* <LandingParent/> */}
+        <Home></Home>
+        {/*<LandingParent/>*/}
       </div>
    
   );

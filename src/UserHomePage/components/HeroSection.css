@@ -1,0 +1,84 @@
+/* HERO MAIN WRAPPER */
+.hero-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Same padding as reference */
+  padding: 60px 80px;
+
+  background-color: #111;
+  color: white;
+
+  /* ensures hero fills screen below navbar */
+  min-height: calc(100vh - 90px);
+
+  box-sizing: border-box;
+}
+
+/* LEFT SECTION */
+.hero-left h2 {
+  color: #ff6a00;
+  font-size: 30px;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+
+.hero-left h1 {
+  font-size: 55px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 10px 0 25px 0;
+}
+
+
+.hero-left p {
+  font-size: 22px;
+  opacity: 0.9;
+  max-width: 450px;
+  margin-bottom: 25px;
+}
+
+.hero-left h2,
+.hero-left h1,
+.hero-left p {
+  transition: 0.3s ease;
+}
+
+.hero-left h2:hover,
+.hero-left h1:hover,
+.hero-left p:hover {
+  transform: scale(1.04);
+}
+
+/* BUTTON */
+.ride-btn {
+  background-color: #ff6a00;
+  color: #000;
+  padding: 14px 35px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.ride-btn:hover {
+  background-color: #ffb84d;
+  transform: scale(1.06);
+}
+
+/* CAR IMAGE RIGHT */
+.hero-right img {
+  width: 620px;
+  height: auto;
+  margin-right: 20px;
+  margin-bottom: 100px;
+  filter: drop-shadow(0px 0px 25px rgba(0,0,0,0.7));
+  transition: 0.4s ease;
+}
+
+.hero-right img:hover {
+  transform: scale(1.07);
+}
