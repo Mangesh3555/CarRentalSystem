@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import "./Register.css";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Register() {
-  const navigate = useNavigate();
-
   const [form, setForm] = useState({
-    fullName: "",
+    name: "",
     email: "",
-    phone: "",
+    phoneno: "",
     password: "",
-    confirmPassword: "",
     address: "",
   });
 
@@ -20,7 +17,7 @@ export default function Register() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -31,56 +28,42 @@ export default function Register() {
       }
     }
 
-    if (form.password !== form.confirmPassword) {
-      setMessage("Passwords do not match!");
-      return;
+    try {
+      // Send data to backend
+      const response = await axios.post("http://localhost:8081/users/add", {
+        name: form.name,
+        email: form.email,
+        phoneno: form.phoneno,
+        password: form.password,
+        address: form.address,
+      });
+
+      if (response.data) {
+        setMessage("Registration successful!");
+        setForm({
+          name: "",
+          email: "",
+          phoneno: "",
+          password: "",
+          address: "",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("Registration failed. Try again!");
     }
-
-    // Save user to localStorage
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const userExists = existingUsers.find((u) => u.email === form.email);
-
-    if (userExists) {
-      setMessage("Email already registered!");
-      return;
-    }
-
-    const newUser = {
-      fullName: form.fullName,
-      email: form.email,
-      phone: form.phone,
-      password: form.password,
-      address: form.address,
-    };
-
-    localStorage.setItem("users", JSON.stringify([...existingUsers, newUser]));
-    setMessage("Account created successfully!");
-
-    // Clear form
-    setForm({
-      fullName: "",
-      email: "",
-      phone: "",
-      password: "",
-      confirmPassword: "",
-      address: "",
-    });
-
-    // Optionally redirect to login after 2 seconds
-    setTimeout(() => navigate("/"), 2000);
   };
 
   return (
     <div className="register-page">
       <div className="register-box">
         <h2>Create Account</h2>
-
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            name="fullName"
+            name="name"
             placeholder="Full Name"
-            value={form.fullName}
+            value={form.name}
             onChange={handleChange}
           />
           <input
@@ -92,9 +75,9 @@ export default function Register() {
           />
           <input
             type="number"
-            name="phone"
+            name="phoneno"
             placeholder="Phone Number"
-            value={form.phone}
+            value={form.phoneno}
             onChange={handleChange}
           />
           <input
@@ -102,13 +85,6 @@ export default function Register() {
             name="password"
             placeholder="Password"
             value={form.password}
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={form.confirmPassword}
             onChange={handleChange}
           />
           <textarea
@@ -120,7 +96,12 @@ export default function Register() {
           ></textarea>
 
           {message && (
-            <p style={{ color: message.includes("successfully") ? "green" : "red", fontWeight: "bold" }}>
+            <p
+              style={{
+                color: message.includes("successful") ? "green" : "red",
+                fontWeight: "bold",
+              }}
+            >
               {message}
             </p>
           )}
@@ -129,16 +110,6 @@ export default function Register() {
             Register
           </button>
         </form>
-
-        <p style={{ marginTop: "12px", textAlign: "left" }}>
-          Already have an account?{" "}
-          <span
-            style={{ color: "#ff8300", cursor: "pointer", fontWeight: "bold" }}
-            onClick={() => navigate("/")}
-          >
-            Back to Login
-          </span>
-        </p>
       </div>
     </div>
   );

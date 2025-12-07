@@ -1,0 +1,82 @@
+.variant-container {
+  width: 90%;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.variant-container h2 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.variant-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 14px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.variant-table th,
+.variant-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.variant-table th {
+  background: #333;
+  color: white;
+}
+
+.variant-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.variant-table tr:hover {
+  background: #e8f4ff;
+}
+
+.update-btn,
+.delete-btn {
+  padding: 7px 12px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 3px;
+  transition: 0.3s;
+}
+
+.update-btn {
+  background: #0077ff;
+  color: white;
+}
+
+.update-btn:hover {
+  background: #005fcc;
+}
+
+.delete-btn {
+  background: #ff3b3b;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #d62828;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: green;
+}

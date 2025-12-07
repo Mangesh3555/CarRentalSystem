@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./RegisterAdmin.css";
+import axios from "axios";
 
 export default function RegisterAdmin() {
   const [form, setForm] = useState({
-    email: "",
+    adminname: "",
+    adminemail: "",
     password: "",
-    confirmPassword: "",
   });
 
   const [message, setMessage] = useState("");
@@ -14,21 +15,45 @@ export default function RegisterAdmin() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.email || !form.password || !form.confirmPassword) {
-      setMessage("All fields are required!");
-      return;
+    // Validation
+    for (let key in form) {
+      if (!form[key]) {
+        setMessage("All fields are required!");
+        return;
+      }
     }
 
-    if (form.password !== form.confirmPassword) {
-      setMessage("Passwords do not match!");
-      return;
-    }
+    try {
+      // Axios POST request to backend
+      const response = await axios.post(
+        "http://localhost:8081/admin/add",
+        {
+          adminname: form.adminname,
+          adminemail: form.adminemail,
+          password: form.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    // API call can be added here
-    setMessage("Admin Registered Successfully!");
+      if (response.data) {
+        setMessage("Admin Registered Successfully!");
+        setForm({
+          adminname: "",
+          adminemail: "",
+          password: "",
+        });
+      }
+    } catch (error) {
+      console.error("Registration error:", error.response || error);
+      setMessage("Registration failed. Try again!");
+    }
   };
 
   return (
@@ -36,12 +61,22 @@ export default function RegisterAdmin() {
       <h2>Register Admin</h2>
 
       <form className="register-admin-form" onSubmit={handleSubmit}>
+        <label>Admin Name</label>
+        <input
+          type="text"
+          name="adminname"
+          placeholder="Enter admin name"
+          value={form.adminname}
+          onChange={handleChange}
+          required
+        />
+
         <label>Email Address</label>
         <input
           type="email"
-          name="email"
+          name="adminemail"
           placeholder="Enter admin email"
-          value={form.email}
+          value={form.adminemail}
           onChange={handleChange}
           required
         />
@@ -52,16 +87,6 @@ export default function RegisterAdmin() {
           name="password"
           placeholder="Enter password"
           value={form.password}
-          onChange={handleChange}
-          required
-        />
-
-        <label>Confirm Password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm password"
-          value={form.confirmPassword}
           onChange={handleChange}
           required
         />

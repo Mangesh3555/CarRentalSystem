@@ -8,14 +8,17 @@ import LandingParent from './LandingPage/LandingParent';
 import AdminDashboard from './AdminPage/AdminDashboard';
 import RegisterAdmin from './AdminPage/AdminReg/RegisterAdmin';
 import AddVariant from './AdminPage/AddVarient';
+import Variant from './AdminPage/Variant';
 
 function App() {
   
 
   return (
       <div className="App">
-        <AddVariant/>
-        {/* <RegisterAdmin/> */}
+        {/* <Register/> */}
+        {/* <Variant/> */}
+        {/* <AddVariant/> */}
+        <RegisterAdmin/>
         {/* <AdminDashboard/> */}
         {/* <LandingParent/> */}
       </div>
