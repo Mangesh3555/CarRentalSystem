@@ -29,7 +29,6 @@ function App() {
           <Route path="/variant" element={<Variant />} />
 
         </Routes>
-
       </div>
     </BrowserRouter>
   );
