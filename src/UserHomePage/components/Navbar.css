@@ -29,6 +29,7 @@
 .logo h2 {
   color: white;
   margin-left: 10px;
+  font-size: larger;
 }
 
 .links a {
@@ -42,6 +43,7 @@
 
 .links a:hover {
   transform: scale(1.1);
+  color: white;
 }
 
 .logout {
@@ -57,4 +59,43 @@
   background-color: #e4e1db;
   border-color: #ff3b3b;
 }
+
+
+
+.search-bar {
+  text-align: center;
+
+  /* perfect spacing below hero */
+  margin-top: 10px;
+
+  margin-bottom: 10px;
+
+  
+}
+
+.search-bar input {
+  width: 350px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 1px solid black;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-bar button {
+  padding: 12px 28px;
+  background-color: #ff6a00;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: 0.3s ease;
+}
+
+.search-bar button:hover {
+  transform: scale(1.08);
+}
+
 

@@ -20,11 +20,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 50px;
+  padding: 20px 40px;
   position: absolute;
   width: 100%;
   top: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.55);
   z-index: 10;
 }
 
@@ -37,7 +37,7 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
 
 .nav-links li a {
@@ -51,20 +51,32 @@
   color: orange;
 }
 
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .nav-buttons button {
   background-color: orange;
   border: none;
   color: black;
-  padding: 8px 15px;
+  padding: 8px 18px;
   font-weight: 600;
-  margin-left: 10px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
 }
 
 .nav-buttons button:hover {
-  background-color: darkorange;
+  background-color: #ff8c00;
+  transform: translateY(-2px);
+}
+
+/* Fix: Admin Button Hover Smooth */
+.admin-btn:hover {
+  background-color: #ff9500;
+  transform: scale(1.05);
 }
 
 /* Hero content */
@@ -89,7 +101,7 @@
 }
 
 .hero-text .highlight {
-  color: rgb(255, 255, 255);
+  color: #fff;
 }
 
 .hero-text p {
@@ -124,7 +136,6 @@
   max-width: 350px;
   width: 100%;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  transition: 0.3s;
 }
 
 .form-box:hover {
@@ -195,18 +206,15 @@
   font-size: 14px;
 }
 
-/* Responsive */
+/* Responsive Fixes */
 @media (max-width: 900px) {
   .hero-content {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 20px;
   }
 
   .hero-text {
     max-width: 100%;
-    text-align: center;
     margin-bottom: 30px;
   }
 
@@ -215,17 +223,12 @@
     margin-bottom: 50px;
   }
 
+  /* Hide nav links on small screen */
   .nav-links {
     display: none;
   }
 
   .nav-buttons {
-    display: flex;
-    flex-wrap: wrap;
     gap: 10px;
   }
 }
-.nav-button:hover {
-  transition: 0.3s ease;
-}
-

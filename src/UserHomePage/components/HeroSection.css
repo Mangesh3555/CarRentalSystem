@@ -3,27 +3,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* Same padding as reference */
   padding: 60px 80px;
-
   background-color: #111;
   color: white;
-
-  /* ensures hero fills screen below navbar */
-  min-height: calc(100vh - 90px);
-
+  min-height: 85vh;
   box-sizing: border-box;
 }
 
 /* LEFT SECTION */
 .hero-left h2 {
+  text-align: center;
   color: #ff6a00;
   font-size: 30px;
   margin-bottom: 15px;
   letter-spacing: 1px;
 }
-
 
 .hero-left h1 {
   font-size: 55px;
@@ -32,12 +26,13 @@
   margin: 10px 0 25px 0;
 }
 
-
 .hero-left p {
   font-size: 22px;
   opacity: 0.9;
   max-width: 450px;
   margin-bottom: 25px;
+  margin-left: 50px;
+  text-align: center;
 }
 
 .hero-left h2,
@@ -53,15 +48,15 @@
 }
 
 /* BUTTON */
-.ride-btn {
-  background-color: #ff6a00;
-  color: #000;
+.take-ride {
+  color: #e16f18;
   padding: 14px 35px;
   font-size: 18px;
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.3s ease;
+  text-align: center;
 }
 
 .ride-btn:hover {
@@ -79,6 +74,149 @@
   transition: 0.4s ease;
 }
 
-.hero-right img:hover {
-  transform: scale(1.07);
+/* WHY SECTION BELOW HERO */
+.why-section {
+  background-color: #181818;
+  color: white;
+  padding: 60px 80px;
+  text-align: center;
+  margin-top: -75px;   /* pulls section upward */
+}
+
+.why-title {
+  font-size: 32px;
+  margin-bottom: 40px;
+  color: #ff6a00;
+  letter-spacing: 1px;
+  margin-top: -40px;
+}
+
+.why-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: -15px;
+}
+
+.card {
+  background-color: #222;
+  padding: 30px;
+  border-radius: 12px;
+  width: 32%;
+  transition: 0.3s ease;
+  border: 1px solid #333;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: #ff6a00;
+}
+
+.card h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #ff6a00;
+}
+
+.card p {
+  font-size: 16px;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+/* ---------------- AVAILABLE CAR VARIANTS ---------------- */
+.user-car-section {
+  background-color: #181818;
+  color: white;
+  padding: 50px 80px;
+}
+
+.user-car-section .section-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff6a00;
+  margin-bottom: 35px;
+}
+
+.user-car-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  gap: 20px;
+}
+
+.user-car-card {
+  background: #222;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  transition: 0.3s ease;
+  border: 1px solid #333;
+}
+
+.user-car-card:hover {
+  transform: translateY(-5px);
+  border-color: #ff6a00;
+}
+
+.user-car-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.user-car-card h3 {
+  font-size: 16px;
+  color: #ff6a00;
+  margin-bottom: 5px;
+}
+
+.user-car-card p {
+  font-size: 13px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.user-car-card .rent {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ff6a00;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .user-car-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .user-car-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
+  .hero-left p {
+    margin-left: 0;
+  }
+
+  .hero-right img {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .why-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
 }
