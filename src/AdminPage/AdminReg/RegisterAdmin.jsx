@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./RegisterAdmin.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterAdmin() {
   const [form, setForm] = useState({
@@ -10,6 +11,7 @@ export default function RegisterAdmin() {
   });
 
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,7 +29,6 @@ export default function RegisterAdmin() {
     }
 
     try {
-      // Axios POST request to backend
       const response = await axios.post(
         "http://localhost:8081/admin/add",
         {
@@ -44,11 +45,18 @@ export default function RegisterAdmin() {
 
       if (response.data) {
         setMessage("Admin Registered Successfully!");
+
+        // Reset form
         setForm({
           adminname: "",
           adminemail: "",
           password: "",
         });
+
+        // Navigate after 2 seconds
+        setTimeout(() => {
+          navigate("/admindashboard");
+        }, 2000); // 2000ms = 2 seconds
       }
     } catch (error) {
       console.error("Registration error:", error.response || error);

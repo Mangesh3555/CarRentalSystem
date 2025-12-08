@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./AdminDashboard.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminDashboard() {
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   return (
     <div className="admin-main">
@@ -13,13 +15,24 @@ export default function AdminDashboard() {
           <img src="/images/carbg5.jpg" alt="Car Logo" />
           <span>Car Rental System</span>
         </div>
+
         <div className="menu-right">
-          <p>Register Admin</p>
-          <p>Add Variant</p>
-          <p>Variants</p>
-          <p>Bookings</p>
-          <p>Customers</p>
-          <p className="logout">Logout</p>
+
+          {/* Navigation options */}
+          <p onClick={() => navigate("/registeradmin")}>Register Admin</p>
+
+          <p onClick={() => navigate("/addvariant")}>Add Variant</p>
+
+          <p onClick={() => navigate("/variant")}>Variants</p>
+
+          <p onClick={() => alert("Bookings page coming soon!")}>Bookings</p>
+
+          <p onClick={() => alert("Customers page coming soon!")}>Customers</p>
+
+          <p className="logout" onClick={() => navigate("/")}>
+            Logout
+          </p>
+
         </div>
       </nav>
 
@@ -31,7 +44,10 @@ export default function AdminDashboard() {
           <p className="sub-text">
             Add & Manage Cars, Companies, Variants, Customers, and Bookings Easily
           </p>
-          <button className="admin-btn">GO TO DASHBOARD</button>
+
+          <button className="admin-btn" onClick={() => navigate("/admindashboard")}>
+            GO TO DASHBOARD
+          </button>
         </div>
 
         <div className="admin-image">
@@ -58,14 +74,17 @@ export default function AdminDashboard() {
           <h3>Total Cars</h3>
           <p>120</p>
         </div>
+
         <div className="card">
           <h3>Total Customers</h3>
           <p>85</p>
         </div>
+
         <div className="card">
           <h3>Total Bookings</h3>
           <p>230</p>
         </div>
+
         <div className="card">
           <h3>Total Companies</h3>
           <p>15</p>

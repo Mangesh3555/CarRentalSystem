@@ -1,47 +1,19 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
-  width: 100%;
-  height: 100%;
-  font-family: Arial, sans-serif;
-}
-
-#root {
-  width: 100%;
-  height: 100%;
-}
-
-/* ===== Landing Page Background ===== */
-.landing-background {
-  display: flex;
-  flex-direction: column;       /* Stack content vertically */
-  justify-content: center;      /* Vertical centering */
-  align-items: center;          /* Horizontal centering */
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-}
-
-
-/* ===== Dark Overlay ===== */
+/* Overlay */
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.45);  /* transparent black */
-  backdrop-filter: blur(3px);   /* blur effect */
-  z-index: 1;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  z-index: 1; /* lower than navbar */
 }
 
-/* Place navbar and other content above overlay */
-.navbar, .hero-container, .register-box {
-  position: relative;
-  z-index: 2; 
+/* Navbar always on top */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
 }
-

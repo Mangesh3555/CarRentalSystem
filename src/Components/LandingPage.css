@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.landing-hero {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: orange;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover {
+  color: orange;
+}
+
+.nav-buttons button {
+  background-color: orange;
+  border: none;
+  color: black;
+  padding: 8px 15px;
+  font-weight: 600;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.nav-buttons button:hover {
+  background-color: darkorange;
+}
+
+/* Hero content */
+.hero-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+}
+
+/* Left text */
+.hero-text {
+  max-width: 50%;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 50px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.hero-text .highlight {
+  color: rgb(255, 255, 255);
+}
+
+.hero-text p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: rgb(224, 218, 218);
+  line-height: 1.5;
+}
+
+.hero-text .join-btn {
+  background-color: orange;
+  padding: 12px 25px;
+  border: none;
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.hero-text .join-btn:hover {
+  background-color: darkorange;
+}
+
+/* Right form */
+.form-box {
+  background: rgba(0,0,0,0.8);
+  padding: 30px 25px;
+  border-radius: 12px;
+  color: orange;
+  max-width: 350px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  transition: 0.3s;
+}
+
+.form-box:hover {
+  transform: translateY(-5px);
+}
+
+.form-box h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  text-align: center;
+}
+
+.form-box input,
+.form-box textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 2px solid orange;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+}
+
+.form-box input::placeholder,
+.form-box textarea::placeholder {
+  color: #ddd;
+}
+
+.form-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: orange;
+  border: none;
+  color: black;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.form-box button:hover {
+  background-color: darkorange;
+}
+
+.form-box .form-message {
+  color: yellow;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-box .signup {
+  margin-top: 10px;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+}
+
+.form-box .signup .link-button {
+  background: none;
+  border: none;
+  color: orange;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .form-box {
+    max-width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+.nav-button:hover {
+  transition: 0.3s ease;
+}
+
