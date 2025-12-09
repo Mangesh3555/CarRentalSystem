@@ -1,0 +1,90 @@
+/* Popup overlay */
+.custom-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.742);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+/* Popup card */
+.custom-popup-card {
+  background: #222020;
+  border-radius: 12px;
+  padding: 20px;
+  width: 95%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgb(68, 68, 68);
+  position: relative;
+}
+.custom-popup-card h2 {
+  color: white !important;
+  text-align: center;
+}
+
+
+/* Close button */
+.custom-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Table container FULL width */
+.custom-history-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+/* Table styles */
+.custom-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.custom-history-table th,
+.custom-history-table td {
+  padding: 10px 12px;
+  border: 1px solid #2d2d2d;
+  text-align: center;
+  color: white;
+}
+
+.custom-history-table th {
+  background-color: #181818;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .custom-history-table th,
+  .custom-history-table td {
+    padding: 8px 6px;
+    font-size: 13px;
+  }
+
+  .custom-popup-card {
+    padding: 15px;
+  }
+}

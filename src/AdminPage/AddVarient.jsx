@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./AddVarient.css";
 
 export default function AddVariant() {
+  const navigate = useNavigate(); // <-- Add navigate
   const [form, setForm] = useState({
     variantName: "",
     company: "",
@@ -85,6 +87,24 @@ export default function AddVariant() {
 
   return (
     <div className="add-variant-container">
+      {/* Close Button */}
+      <button
+        className="close-cross-btn"
+        onClick={() => navigate("/admindashboard")} // <-- change route if needed
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          background: "transparent",
+          border: "none",
+          fontSize: "24px",
+          cursor: "pointer",
+          color: "red",
+        }}
+      >
+        ✖
+      </button>
+
       <h2>Add Car Variant</h2>
 
       <form className="add-variant-form" onSubmit={handleSubmit}>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // ✅ import navigate
 import "./Variant.css";
 
 export default function Variant() {
@@ -16,6 +17,8 @@ export default function Variant() {
     ac: "",
     image: null
   });
+
+  const navigate = useNavigate(); // ✅ initialize navigate
 
   // Fetch all cars
   const fetchCars = async () => {
@@ -36,7 +39,6 @@ export default function Variant() {
     fetchCars();
   }, []);
 
-  // Delete car
   const deleteCar = async (id) => {
     if (!window.confirm("Are you sure you want to delete this variant?")) return;
     try {
@@ -49,7 +51,6 @@ export default function Variant() {
     }
   };
 
-  // Start editing a car
   const startEdit = (car) => {
     setEditingCarId(car.id);
     setEditForm({
@@ -60,11 +61,10 @@ export default function Variant() {
       seatCapacity: car.seatCapacity,
       rentPerDay: car.rentPerDay,
       ac: car.ac,
-      image: null // new image optional
+      image: null
     });
   };
 
-  // Handle edit form changes
   const handleEditChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "image") {
@@ -74,7 +74,6 @@ export default function Variant() {
     }
   };
 
-  // Submit update
   const submitUpdate = async (id) => {
     const formData = new FormData();
     for (let key in editForm) {
@@ -94,7 +93,6 @@ export default function Variant() {
     }
   };
 
-  // Convert byte array to base64 for image
   const getImageSrc = (image) => {
     if (!image) return null;
     const bytes = image instanceof Array ? image : image.data || image;
@@ -105,6 +103,14 @@ export default function Variant() {
 
   return (
     <div className="variant-container">
+      {/* ✅ Close button */}
+      <button
+        className="close-cross-btn"
+        onClick={() => navigate("/admindashboard")}
+      >
+        ✖
+      </button>
+
       <h2>Car Variants</h2>
       {message && <p className="message">{message}</p>}
 
@@ -130,52 +136,22 @@ export default function Variant() {
               {editingCarId === car.id ? (
                 <>
                   <td>
-                    <input
-                      type="text"
-                      name="variantName"
-                      value={editForm.variantName}
-                      onChange={handleEditChange}
-                    />
+                    <input type="text" name="variantName" value={editForm.variantName} onChange={handleEditChange} />
                   </td>
                   <td>
-                    <input
-                      type="text"
-                      name="company"
-                      value={editForm.company}
-                      onChange={handleEditChange}
-                    />
+                    <input type="text" name="company" value={editForm.company} onChange={handleEditChange} />
                   </td>
                   <td>
-                    <input
-                      type="number"
-                      name="year"
-                      value={editForm.year}
-                      onChange={handleEditChange}
-                    />
+                    <input type="number" name="year" value={editForm.year} onChange={handleEditChange} />
                   </td>
                   <td>
-                    <input
-                      type="text"
-                      name="fuelType"
-                      value={editForm.fuelType}
-                      onChange={handleEditChange}
-                    />
+                    <input type="text" name="fuelType" value={editForm.fuelType} onChange={handleEditChange} />
                   </td>
                   <td>
-                    <input
-                      type="number"
-                      name="seatCapacity"
-                      value={editForm.seatCapacity}
-                      onChange={handleEditChange}
-                    />
+                    <input type="number" name="seatCapacity" value={editForm.seatCapacity} onChange={handleEditChange} />
                   </td>
                   <td>
-                    <input
-                      type="number"
-                      name="rentPerDay"
-                      value={editForm.rentPerDay}
-                      onChange={handleEditChange}
-                    />
+                    <input type="number" name="rentPerDay" value={editForm.rentPerDay} onChange={handleEditChange} />
                   </td>
                   <td>
                     <select name="ac" value={editForm.ac} onChange={handleEditChange}>
@@ -187,12 +163,8 @@ export default function Variant() {
                     <input type="file" name="image" onChange={handleEditChange} />
                   </td>
                   <td>
-                    <button className="btn update" onClick={() => submitUpdate(car.id)}>
-                      Save
-                    </button>
-                    <button className="btn delete" onClick={() => setEditingCarId(null)}>
-                      Cancel
-                    </button>
+                    <button className="btn update" onClick={() => submitUpdate(car.id)}>Save</button>
+                    <button className="btn delete" onClick={() => setEditingCarId(null)}>Cancel</button>
                   </td>
                 </>
               ) : (
@@ -206,22 +178,14 @@ export default function Variant() {
                   <td>{car.ac}</td>
                   <td>
                     {car.image ? (
-                      <img
-                        src={getImageSrc(car.image)}
-                        alt={car.variantName}
-                        className="variant-image"
-                      />
+                      <img src={getImageSrc(car.image)} alt={car.variantName} className="variant-image" />
                     ) : (
                       "No Image"
                     )}
                   </td>
                   <td>
-                    <button className="btn update" onClick={() => startEdit(car)}>
-                      Update
-                    </button>
-                    <button className="btn delete" onClick={() => deleteCar(car.id)}>
-                      Delete
-                    </button>
+                    <button className="btn update" onClick={() => startEdit(car)}>Update</button>
+                    <button className="btn delete" onClick={() => deleteCar(car.id)}>Delete</button>
                   </td>
                 </>
               )}

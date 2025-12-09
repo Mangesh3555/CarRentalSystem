@@ -37,9 +37,7 @@ export default function RegisterAdmin() {
           password: form.password,
         },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       );
 
@@ -47,16 +45,12 @@ export default function RegisterAdmin() {
         setMessage("Admin Registered Successfully!");
 
         // Reset form
-        setForm({
-          adminname: "",
-          adminemail: "",
-          password: "",
-        });
+        setForm({ adminname: "", adminemail: "", password: "" });
 
         // Navigate after 2 seconds
         setTimeout(() => {
           navigate("/admindashboard");
-        }, 2000); // 2000ms = 2 seconds
+        }, 2000);
       }
     } catch (error) {
       console.error("Registration error:", error.response || error);
@@ -64,8 +58,17 @@ export default function RegisterAdmin() {
     }
   };
 
+  const handleClose = () => {
+    navigate("/admindashboard"); // Close goes back to admin dashboard
+  };
+
   return (
     <div className="register-admin-container">
+      {/* Close button */}
+      <button className="close-btn" onClick={handleClose}>
+        ✖
+      </button>
+
       <h2>Register Admin</h2>
 
       <form className="register-admin-form" onSubmit={handleSubmit}>

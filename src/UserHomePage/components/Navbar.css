@@ -3,11 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-
-  /* Same as orange-car page */
   background-color: #272525;
-
-  /* make navbar float above hero cleanly */
   position: sticky;
   top: 0;
   z-index: 10;
@@ -32,45 +28,45 @@
   font-size: larger;
 }
 
-.links a {
-  margin-left: 25px;
-  color: #ff6a00;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
-  transition: 0.3s ease;
+/* ---------------- Links ---------------- */
+.links {
+  display: flex;
+  align-items: center;
 }
 
-.links a:hover {
-  transform: scale(1.1);
+.link-btn {
+  margin-left: 20px;
+  padding: 6px 14px;
+  border: none;
+  background: none;
+  color: #ff6a00;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.link-btn:hover {
   color: white;
+  transform: scale(1.05);
 }
 
 .logout {
-  color: #eb4913 !important;
   border: 1px solid #ff2b2b;
-  padding: 6px 14px;
   border-radius: 8px;
-  transition: 0.25s ease;
+  padding: 6px 14px;
+  color: #eb4913;
 }
 
 .logout:hover {
-  transform: scale(1.1);
   background-color: #e4e1db;
   border-color: #ff3b3b;
 }
 
-
-
+/* ---------------- Search Bar ---------------- */
 .search-bar {
   text-align: center;
-
-  /* perfect spacing below hero */
   margin-top: 10px;
-
   margin-bottom: 10px;
-
-  
 }
 
 .search-bar input {
@@ -97,5 +93,3 @@
 .search-bar button:hover {
   transform: scale(1.08);
 }
-
-

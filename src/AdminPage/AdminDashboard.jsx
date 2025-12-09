@@ -5,24 +5,48 @@ import axios from "axios";
 
 export default function AdminDashboard() {
   const [search, setSearch] = useState("");
-  const [carList, setCarList] = useState([]);  
+  const [carList, setCarList] = useState([]);
+  const [filteredCars, setFilteredCars] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const navigate = useNavigate();
 
   // ---------------- FETCH ALL CARS ----------------
   useEffect(() => {
     axios
-      .get("http://localhost:8081/api/cars/all") // ✔ Correct API URL
+      .get("http://localhost:8081/api/cars/all")
       .then((res) => {
         if (res.data.success) {
-          setCarList(res.data.data); // ✔ FIXED → access "data" inside response
+          setCarList(res.data.data);
+          setFilteredCars(res.data.data); // show all initially
         } else {
           setCarList([]);
+          setFilteredCars([]);
         }
       })
       .catch((err) => {
         console.log("Error fetching cars:", err);
       });
   }, []);
+
+  // ---------------- FETCH BOOKINGS WITH CUSTOMER ----------------
+  useEffect(() => {
+    axios
+      .get("http://localhost:8081/admin/bookings")
+      .then((res) => setBookings(res.data))
+      .catch((err) => console.log("Error fetching bookings:", err));
+  }, []);
+
+  // ---------------- HANDLE SEARCH ----------------
+  const handleSearch = () => {
+    if (!search) {
+      setFilteredCars(carList); // show all if search is empty
+    } else {
+      const filtered = carList.filter((car) =>
+        car.company.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredCars(filtered);
+    }
+  };
 
   return (
     <div className="admin-main">
@@ -33,16 +57,21 @@ export default function AdminDashboard() {
         </div>
 
         <div className="search-bar">
-          <input type="text" placeholder="Search Cars here..." />
-          <button>Search</button>
+          <input
+            type="text"
+            placeholder="Search Cars here..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
         </div>
 
         <div className="menu-right">
           <p onClick={() => navigate("/registeradmin")}>Register Admin</p>
           <p onClick={() => navigate("/addvariant")}>Add Variant</p>
           <p onClick={() => navigate("/variant")}>Variants</p>
-          <p onClick={() => alert("Bookings page coming soon!")}>Bookings</p>
-          <p onClick={() => alert("Customers page coming soon!")}>Customers</p>
+          <p onClick={() => navigate("/admin/bookings")}>Bookings</p>
+          <p onClick={() => navigate("/admin/customers")}>Customers</p>
           <p className="logout" onClick={() => navigate("/")}>Logout</p>
         </div>
       </nav>
@@ -56,7 +85,6 @@ export default function AdminDashboard() {
             Add & Manage Cars, Variants, Customers, and Bookings Easily
           </p>
         </div>
-
         <div className="admin-image">
           <img src="/images/kia (2).png" alt="Car" />
         </div>
@@ -67,18 +95,19 @@ export default function AdminDashboard() {
         <h2 className="section-title">Available Car Variants</h2>
 
         <div className="admin-car-grid">
-          {carList.length === 0 ? (
+          {filteredCars.length === 0 ? (
             <p className="no-data">No Cars Added Yet</p>
           ) : (
-            carList.map((car) => (
+            filteredCars.map((car) => (
               <div key={car.id} className="admin-car-card">
-                <img
-                  src={car.image}
-                  alt={car.variantName}
-                />
+                <img src={car.image} alt={car.variantName} />
                 <h3>{car.variantName}</h3>
-                <p>{car.company} • {car.year}</p>
-                <p>{car.fuelType} • {car.seatCapacity} Seater</p>
+                <p>
+                  {car.company} • {car.year}
+                </p>
+                <p>
+                  {car.fuelType} • {car.seatCapacity} Seater
+                </p>
                 <div className="rent">₹ {car.rentPerDay}/day</div>
               </div>
             ))

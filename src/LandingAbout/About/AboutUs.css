@@ -1,0 +1,135 @@
+.about-container {
+  width: 100%;
+  padding: 40px 80px;
+  background: #f8f8f8;
+  color: #111;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* HERO SECTION */
+.about-hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.about-hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #222;
+}
+
+.about-hero p {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* IMAGE + WHO WE ARE */
+.about-flex {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 60px 0;
+  align-items: center;
+}
+
+.about-img-box {
+  flex: 1;
+  margin-left: -50px;
+}
+
+.about-img {
+  width: 100%;
+  /* border-radius: 20px; */
+  /* box-shadow: 0 10px 20px rgba(0,0,0,0.15); */
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.about-text ul {
+  padding-left: 20px;
+  margin: 15px 0;
+}
+
+.about-text li {
+  color: #444;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+/* WHY CHOOSE US */
+.why-choose {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.why-choose h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.why-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+}
+
+.why-card h3 {
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.why-card p {
+  color: #666;
+}
+
+/* EXPERIENCE BOX */
+.experience {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 40px;
+  border-radius: 18px;
+  margin-top: 70px;
+}
+
+.experience h1 {
+  font-size: 38px;
+}
+
+.experience p {
+  font-size: 18px;
+  margin-top: 8px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+  .about-flex {
+    flex-direction: column;
+  }
+
+  .about-container {
+    padding: 20px 25px;
+  }
+}

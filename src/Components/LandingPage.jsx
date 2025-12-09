@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LandingPage.css";
 
@@ -33,31 +33,34 @@ export default function LandingPage() {
   // -------------------------------
   // USER LOGIN HANDLER
   // -------------------------------
-  const handleUserLogin = async () => {
-    if (!userLogin.email || !userLogin.password) {
-      setMessage("Enter email and password");
-      return;
+ // USER LOGIN HANDLER
+const handleUserLogin = async () => {
+  if (!userLogin.email || !userLogin.password) {
+    setMessage("Enter email and password");
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      "http://localhost:8081/users/login",
+      userLogin
+    );
+
+    if (response.data) {
+      // ⭐ Store full user object
+      localStorage.setItem("user", JSON.stringify(response.data));
+
+      navigate("/home");
+    } else {
+      setMessage("Invalid User Email or Password");
     }
+  } catch (error) {
+    console.error(error);
+    setMessage("Login failed! Try again.");
+  }
+};
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8081/users/login",
-        userLogin
-      );
 
-      if (response.data) {
-        // ⭐ STORE USER EMAIL so profile page can fetch user info
-        localStorage.setItem("userEmail", userLogin.email);
-
-        navigate("/home"); 
-      } else {
-        setMessage("Invalid User Email or Password");
-      }
-    } catch (error) {
-      console.error(error);
-      setMessage("Login failed! Try again.");
-    }
-  };
 
   // -------------------------------
   // ADMIN LOGIN HANDLER
@@ -136,12 +139,11 @@ export default function LandingPage() {
       <nav className="navbar">
         <div className="logo">CaRs</div>
         <ul className="nav-links">
-          <li><a href="#home">HOME</a></li>
-          <li><a href="#about">ABOUT</a></li>
-          <li><a href="#services">SERVICES</a></li>
-          <li><a href="#contact">CONTACT</a></li>
-          <li><a href="#feedback">FEEDBACK</a></li>
-        </ul>
+          <li><Link to="/">HOME</Link></li>
+          <li><Link to="/about">ABOUT</Link></li>
+          <li><Link to="/contact">CONTACT</Link></li>
+          <li><Link to="/feedback">FEEDBACK</Link></li>
+          </ul>
         <div className="nav-buttons">
           <button
             onClick={() => {

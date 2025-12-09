@@ -1,30 +1,23 @@
-/* =============================
-   GLOBAL PROFILE PAGE STYLING
-   ============================= */
-
-.profile-page, 
-.profile-container {
+/* Keep same background as user home page */
+.profile-page {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #1f1c2c, #928dab);
+  background: linear-gradient(to right, #252627, #242526, #262727);
   padding: 20px;
   box-sizing: border-box;
 }
 
-/* =============================
-   CARD BOX
-   ============================= */
-
+/* Profile card styling */
 .profile-card {
   width: 100%;
   max-width: 450px;
-  background-color: #1e1e2f;
+  background-color: rgba(0,0,0,0.6); /* semi-transparent dark to match home theme */
   color: #ffffff;
   padding: 30px 25px;
   border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -38,13 +31,9 @@
   text-align: center;
   margin-bottom: 25px;
   font-size: 30px;
-  color: #ff7b47;
+  color: orange;
   letter-spacing: 1px;
 }
-
-/* =============================
-   FIELDS
-   ============================= */
 
 .profile-card p {
   margin-bottom: 18px;
@@ -57,10 +46,6 @@
   font-weight: 600;
 }
 
-/* =============================
-   BUTTONS ROW
-   ============================= */
-
 .button-row {
   display: flex;
   justify-content: space-between;
@@ -68,7 +53,6 @@
   margin-top: 20px;
 }
 
-/* BACK TO HOME */
 .home-btn {
   flex: 1;
   padding: 12px;
@@ -86,7 +70,6 @@
   background: #3d8b3f;
 }
 
-/* LOGOUT BUTTON */
 .logout-btn {
   flex: 1;
   padding: 12px;
@@ -103,10 +86,6 @@
 .logout-btn:hover {
   background: #d90404;
 }
-
-/* =============================
-   RESPONSIVE
-   ============================= */
 
 @media (max-width: 500px) {
   .profile-card {
