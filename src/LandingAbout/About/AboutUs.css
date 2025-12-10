@@ -1,8 +1,8 @@
 .about-container {
   width: 100%;
   padding: 40px 80px;
-  background: #f8f8f8;
-  color: #111;
+  background: rgba(183, 172, 172, 0.2);
+  color: #f8f7f700;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -15,13 +15,13 @@
 .about-hero h1 {
   font-size: 42px;
   font-weight: 700;
-  color: #222;
+  color: #dfd5d5;
 }
 
 .about-hero p {
   margin-top: 15px;
   font-size: 18px;
-  color: #555;
+  color: #f1eded;
   line-height: 1.7;
 }
 
@@ -47,6 +47,10 @@
 
 .about-text {
   flex: 1;
+  color: #dfd5d5;
+}
+.about-text p{
+  color: black
 }
 
 .about-text h2 {
@@ -61,7 +65,7 @@
 }
 
 .about-text li {
-  color: #444;
+  color: #f1eded;
   font-size: 17px;
   margin-bottom: 8px;
 }
@@ -121,6 +125,7 @@
 .experience p {
   font-size: 18px;
   margin-top: 8px;
+  color: rgb(244, 153, 18);
 }
 
 /* RESPONSIVE */

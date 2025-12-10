@@ -98,3 +98,51 @@
 .close-cross-btn:hover {
   opacity: 0.7;
 }
+.reason-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reason-box {
+  background: white;
+  padding: 20px;
+  width: 350px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.reason-box textarea {
+  width: 100%;
+  height: 90px;
+  margin-top: 10px;
+  resize: none;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.reason-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-btn {
+  background: green;
+  padding: 8px 15px;
+  color: white;
+  border-radius: 5px;
+}
+
+.cancel-btn {
+  background: red;
+  padding: 8px 15px;
+  color: white;
+  border-radius: 5px;
+}

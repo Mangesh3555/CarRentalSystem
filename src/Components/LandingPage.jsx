@@ -3,11 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LandingPage.css";
 
+import AboutUs from "../LandingAbout/About/AboutUs";
+import ContactUs from "../LandingAbout/contact/ContactUs";
+import Services from "../LandingAbout/Service/Services";
+
 export default function LandingPage() {
   const navigate = useNavigate();
 
   const [activeForm, setActiveForm] = useState("user"); 
   const [message, setMessage] = useState("");
+
+  const [showAbout, setShowAbout] = useState(false);
+    const [showContact, setShowContact] = useState(false);
+    const [showServices, setShowServices] = useState(false);
 
   // User Login
   const [userLogin, setUserLogin] = useState({
@@ -140,10 +148,36 @@ const handleUserLogin = async () => {
         <div className="logo">CaRs</div>
         <ul className="nav-links">
           <li><Link to="/">HOME</Link></li>
-          <li><Link to="/about">ABOUT</Link></li>
-          <li><Link to="/contact">CONTACT</Link></li>
-          <li><Link to="/feedback">FEEDBACK</Link></li>
-          </ul>
+           {/* ABOUT */}
+          <li>
+            <button
+              className="nav-btn-link"
+              onClick={() => setShowAbout(true)}
+            >
+              ABOUT
+            </button>
+          </li>
+
+          {/* 🔥 SERVICES BUTTON CHANGED TO OVERLAY (NOT LINK) */}
+          <li>
+            <button
+              className="nav-btn-link"
+              onClick={() => setShowServices(true)}   // 🔥 ADDED
+            >
+              SERVICES
+            </button>
+          </li>
+
+          {/* CONTACT */}
+          <li>
+            <button
+              className="nav-btn-link"
+              onClick={() => setShowContact(true)}
+            >
+              CONTACT
+            </button>
+          </li>
+        </ul>
         <div className="nav-buttons">
           <button
             onClick={() => {
@@ -307,6 +341,35 @@ const handleUserLogin = async () => {
           )}
         </div>
       </div>
+        {/* ⭐ ABOUT US OVERLAY */}
+            {showAbout && (
+              <div className="overlay-about">
+                <AboutUs />
+                <button className="close-about" onClick={() => setShowAbout(false)}>
+                  HOME
+                </button>
+              </div>
+            )}
+      
+            {/* ⭐ CONTACT US OVERLAY */}
+            {showContact && (
+              <div className="overlay-about">
+                <ContactUs />
+                <button className="close-about" onClick={() => setShowContact(false)}>
+                  HOME
+                </button>
+              </div>
+            )}
+      
+            {/* ⭐🔥 SERVICES OVERLAY — NEWLY ADDED */}
+            {showServices && (
+              <div className="overlay-about">
+                <Services />   {/* 🔥 ADDED */}
+                <button className="close-about" onClick={() => setShowServices(false)}>
+                  HOME
+                </button>
+              </div>
+            )}
     </div>
   );
 }

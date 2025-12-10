@@ -14,29 +14,35 @@ export default function HeroSection({ companyFilter }) {
     fetch("http://localhost:8081/api/cars/all")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) setCars(data.data);
+        if (data.success) {
+          setCars(data.data);
+          setFilteredCars(data.data); // 👈 DEFAULT show all cars
+        }
       })
       .catch((err) => console.error(err));
   }, []);
 
-  // Apply company filter
+  // Apply filter whenever companyFilter or cars changes
   useEffect(() => {
-    if (!companyFilter) setFilteredCars(cars);
-    else
-      setFilteredCars(
-        cars.filter((car) =>
-          car.company.toLowerCase().includes(companyFilter.toLowerCase())
-        )
+    let trimmed = companyFilter.trim().toLowerCase();
+
+    if (trimmed === "") {
+      setFilteredCars(cars); // 👈 Show ALL cars
+    } else {
+      const filtered = cars.filter((car) =>
+        car.company.toLowerCase().includes(trimmed)
       );
+      setFilteredCars(filtered);
+    }
   }, [companyFilter, cars]);
 
-  // Fetch logged-in user info from localStorage
+  // Fetch logged-in user info
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) setUserData(storedUser);
   }, []);
 
-  // BookingForm component
+  // Booking form
   const BookingForm = ({ selectedCar, onClose }) => {
     const [pickupDate, setPickupDate] = useState("");
     const [returnDate, setReturnDate] = useState("");
@@ -44,7 +50,6 @@ export default function HeroSection({ companyFilter }) {
     const [totalRent, setTotalRent] = useState(0);
     const [message, setMessage] = useState("");
 
-    // Auto-calculate days and total rent
     useEffect(() => {
       if (pickupDate && returnDate) {
         const start = new Date(pickupDate);
@@ -74,7 +79,7 @@ export default function HeroSection({ companyFilter }) {
       }
 
       const bookingData = {
-        userId: userData.userid || userData.id, // backend field
+        userId: userData.userid || userData.id,
         carId: selectedCar.id,
         carVariant: selectedCar.variantName,
         pickupDate,
@@ -85,10 +90,7 @@ export default function HeroSection({ companyFilter }) {
       };
 
       try {
-        const res = await axios.post(
-          "http://localhost:8081/booking/create",
-          bookingData
-        );
+        await axios.post("http://localhost:8081/booking/create", bookingData);
         setMessage("Booking successful!");
         setTimeout(() => {
           onClose();
@@ -194,7 +196,7 @@ export default function HeroSection({ companyFilter }) {
         </div>
       </div>
 
-      {/* POPUP CAR DETAILS */}
+      {/* POPUP */}
       {selectedCar && (
         <div
           className="popup-overlay"
@@ -215,8 +217,10 @@ export default function HeroSection({ companyFilter }) {
                 >
                   ✖
                 </button>
+
                 <img src={selectedCar.image} alt="car" className="popup-img" />
                 <h2>{selectedCar.variantName}</h2>
+
                 <p>
                   <strong>Company:</strong> {selectedCar.company}
                 </p>
@@ -224,12 +228,14 @@ export default function HeroSection({ companyFilter }) {
                   <strong>Year:</strong> {selectedCar.year}
                 </p>
                 <p>
-                  <strong>Fuel Type:</strong> {selectedCar.fuelType}
+                  <strong>Fuel:</strong> {selectedCar.fuelType}
                 </p>
                 <p>
                   <strong>Seats:</strong> {selectedCar.seatCapacity}
                 </p>
+
                 <h3 className="popup-rent">₹ {selectedCar.rentPerDay} / day</h3>
+
                 <button
                   className="popup-book-btn"
                   onClick={() => setShowBooking(true)}

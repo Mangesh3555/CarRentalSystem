@@ -9,10 +9,17 @@
   min-height: 100vh;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;   /* ⭐ Keeps background fixed */
   position: relative;
   color: white;
   display: flex;
   flex-direction: column;
+  transition: filter 0.3s ease-in-out;
+}
+
+
+.landing-hero.blurred {
+  filter: blur(8px);
 }
 
 /* Navbar */
@@ -50,7 +57,19 @@
 .nav-links li a:hover {
   color: orange;
 }
+/* ⭐ Making ABOUT button look like a normal link */
+.nav-btn-link {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+}
 
+.nav-btn-link:hover {
+  color: orange;
+}
 .nav-buttons {
   display: flex;
   align-items: center;
@@ -231,4 +250,41 @@
   .nav-buttons {
     gap: 10px;
   }
+}
+* ------------------------------------------------------------- */
+/* ⭐⭐⭐ ADDED FOR ABOUT-US OVERLAY ⭐⭐⭐ */
+/* ------------------------------------------------------------- */
+
+.overlay-about {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+     /* dark background */
+  z-index: 999;
+  overflow-y: auto;                /* scrolling enabled */
+  padding: 60px 20px;
+}
+
+/* Close button */
+.close-about {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  background: orange;
+  border: none;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  border-radius: 8px;
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+.close-about:hover {
+  background: rgb(255, 136, 0);
 }

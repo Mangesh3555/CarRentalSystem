@@ -15,7 +15,7 @@
 
 /* Popup card */
 .custom-popup-card {
-  background: #222020;
+  background: #f2eeeed7;
   border-radius: 12px;
   padding: 20px;
   width: 95%;
@@ -26,7 +26,7 @@
   position: relative;
 }
 .custom-popup-card h2 {
-  color: white !important;
+  color: rgb(0, 0, 0) !important;
   text-align: center;
 }
 
@@ -65,7 +65,10 @@
   padding: 10px 12px;
   border: 1px solid #2d2d2d;
   text-align: center;
-  color: white;
+  color: rgb(247, 243, 243);
+}
+.custom-history-table td {
+  color: #181818;
 }
 
 .custom-history-table th {
@@ -87,4 +90,9 @@
   .custom-popup-card {
     padding: 15px;
   }
+}
+.reject-reason {
+  color: #ff6b6b;
+  font-weight: 600;
+  font-style: italic;
 }

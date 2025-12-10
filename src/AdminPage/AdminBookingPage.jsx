@@ -5,6 +5,10 @@ import "./AdminBookingPage.css";
 
 export default function AdminBookingPage() {
   const [bookings, setBookings] = useState([]);
+  const [showReasonModal, setShowReasonModal] = useState(false);
+  const [rejectReason, setRejectReason] = useState("");
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +28,9 @@ export default function AdminBookingPage() {
     try {
       await axios.put(`http://localhost:8081/booking/status/${id}?status=APPROVED`);
       setBookings((prev) =>
-        prev.map((b) => (b.bookingId === id ? { ...b, status: "APPROVED" } : b))
+        prev.map((b) =>
+          b.bookingId === id ? { ...b, status: "APPROVED" } : b
+        )
       );
     } catch (err) {
       console.error(err);
@@ -32,14 +38,34 @@ export default function AdminBookingPage() {
     }
   };
 
-  const rejectBooking = async (id) => {
-    if (!window.confirm("Are you sure you want to reject this booking?")) return;
+  // ⭐ OPEN REASON POPUP ⭐
+  const openRejectPopup = (id) => {
+    setSelectedBookingId(id);
+    setRejectReason("");
+    setShowReasonModal(true);
+  };
+
+  // ⭐ SUBMIT REJECTION WITH REASON ⭐
+  const submitReject = async () => {
+    if (!rejectReason.trim()) {
+      alert("Please enter a reason!");
+      return;
+    }
 
     try {
-      await axios.put(`http://localhost:8081/booking/reject/${id}`);
-      setBookings((prev) =>
-        prev.map((b) => (b.bookingId === id ? { ...b, status: "REJECTED" } : b))
+      await axios.put(
+        `http://localhost:8081/booking/reject/${selectedBookingId}?reason=${rejectReason}`
       );
+
+      setBookings((prev) =>
+        prev.map((b) =>
+          b.bookingId === selectedBookingId
+            ? { ...b, status: "REJECTED", rejectReason }
+            : b
+        )
+      );
+
+      setShowReasonModal(false);
     } catch (err) {
       console.error(err);
       alert("Failed to reject booking!");
@@ -48,7 +74,7 @@ export default function AdminBookingPage() {
 
   return (
     <div className="admin-booking-container">
-      {/* Cross button */}
+      {/* Close Button */}
       <button className="close-cross-btn" onClick={() => navigate("/admindashboard")}>
         ✖
       </button>
@@ -63,13 +89,14 @@ export default function AdminBookingPage() {
             <thead>
               <tr>
                 <th>Booking ID</th>
-                <th>Customer Name</th> {/* Replaced Car ID with Customer Name */}
+                <th>Customer Name</th>
                 <th>Car Variant</th>
                 <th>Pickup Date</th>
                 <th>Return Date</th>
                 <th>Total Days</th>
                 <th>Total Amount</th>
                 <th>Status</th>
+                <th>Reject Reason</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -77,12 +104,13 @@ export default function AdminBookingPage() {
               {bookings.map((b) => (
                 <tr key={b.bookingId}>
                   <td>{b.bookingId}</td>
-                  <td>{b.user?.name || "N/A"}</td> {/* Display customer name */}
+                  <td>{b.user?.name || "N/A"}</td>
                   <td>{b.carVariant || "N/A"}</td>
                   <td>{b.pickupDate}</td>
                   <td>{b.returnDate}</td>
                   <td>{b.totalDays}</td>
                   <td>₹{b.totalAmount}</td>
+
                   <td
                     style={{
                       color:
@@ -94,21 +122,54 @@ export default function AdminBookingPage() {
                       fontWeight: "bold",
                     }}
                   >
-                    {b.status || "PENDING"}
+                    {b.status}
                   </td>
+
+                  <td>{b.rejectReason || "—"}</td>
+
                   <td>
                     {b.status === "PENDING" && (
                       <>
-                        <button onClick={() => approveBooking(b.bookingId)}>Approve</button>
-                        <button onClick={() => rejectBooking(b.bookingId)}>Reject</button>
+                        <button onClick={() => approveBooking(b.bookingId)}>
+                          Approve
+                        </button>
+
+                        <button onClick={() => openRejectPopup(b.bookingId)}>
+                          Reject
+                        </button>
                       </>
                     )}
+
                     {(b.status === "APPROVED" || b.status === "REJECTED") && <span>—</span>}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* ⭐ REJECTION REASON POPUP ⭐ */}
+      {showReasonModal && (
+        <div className="reason-modal">
+          <div className="reason-box">
+            <h3>Enter Reject Reason</h3>
+
+            <textarea
+              placeholder="Enter reason..."
+              value={rejectReason}
+              onChange={(e) => setRejectReason(e.target.value)}
+            />
+
+            <div className="reason-buttons">
+              <button className="submit-btn" onClick={submitReject}>
+                Submit
+              </button>
+              <button className="cancel-btn" onClick={() => setShowReasonModal(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

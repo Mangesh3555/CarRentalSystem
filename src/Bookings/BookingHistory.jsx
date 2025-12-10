@@ -20,24 +20,29 @@ export default function BookingHistory({ onClose }) {
     }
   }, [userData]);
 
-  // 🔴 CANCEL BOOKING FUNCTION
- const cancelBooking = async (bookingId) => {
-  if (!window.confirm("Are you sure you want to cancel this booking?")) return;
+  // CANCEL BOOKING (status update only)
+  const cancelBooking = async (bookingId) => {
+    if (!window.confirm("Are you sure you want to cancel this booking?")) return;
 
-  try {
-    await axios.delete(`http://localhost:8081/booking/delete/${bookingId}`);
+    try {
+      const res = await axios.put(
+        `http://localhost:8081/booking/cancel/${bookingId}`
+      );
 
-    alert("Booking cancel successfully!");
+      if (res.data) {
+        alert("Booking cancelled successfully!");
 
-    // Remove the booking from table
-    setBookings((prev) => prev.filter((b) => b.bookingId !== bookingId));
-  } catch (err) {
-    console.error("SERVER ERROR:", err.response?.data || err);
-    alert("Failed to cancel booking!");
-  }
-};
-
-
+        setBookings((prev) =>
+          prev.map((b) =>
+            b.bookingId === bookingId ? { ...b, status: "CANCELLED" } : b
+          )
+        );
+      }
+    } catch (err) {
+      console.error("SERVER ERROR:", err.response?.data || err);
+      alert("Failed to cancel booking!");
+    }
+  };
 
   if (!userData) return <p>Please login first to see your bookings.</p>;
 
@@ -62,7 +67,8 @@ export default function BookingHistory({ onClose }) {
                   <th>Total Days</th>
                   <th>Amount</th>
                   <th>Status</th>
-                  <th>Action</th> 
+                  <th>Reject Reason</th> {/* ⭐ Added */}
+                  <th>Action</th>
                 </tr>
               </thead>
 
@@ -91,6 +97,11 @@ export default function BookingHistory({ onClose }) {
                       }}
                     >
                       {b.status}
+                    </td>
+
+                    {/* ⭐ SHOW REJECT REASON */}
+                    <td style={{ color: "White", fontWeight: 500 }}>
+                      {b.rejectReason || "—"}
                     </td>
 
                     {/* ACTION BUTTON */}

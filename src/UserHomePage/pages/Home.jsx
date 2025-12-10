@@ -16,7 +16,7 @@ export default function Home() {
   // Toggle Booking History display
   const handleShowBookings = () => {
     setShowBookings((prev) => !prev);
-  };
+  }; 
 
   return (
     <>

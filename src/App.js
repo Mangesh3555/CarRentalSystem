@@ -18,6 +18,7 @@ import BookingPage from './Bookings/BookingPage';
 import BookingHistory from './Bookings/BookingHistory';
 import AdminBookingPage from './AdminPage/AdminBookingPage';
 import Customers from './AdminPage/Customers';
+import Services from './LandingAbout/Service/Services';
 
 function App() {
   return (
@@ -36,8 +37,9 @@ function App() {
 
           {/* USER HOME PAGE */}
           <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<AboutUs />} />
+          {/* <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/service" element={<Services />} /> */}
 
           {/* USER PROFILE PAGE */}
           <Route path="/profile" element={<UserProfile />} />

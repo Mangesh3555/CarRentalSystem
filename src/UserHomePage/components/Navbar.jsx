@@ -17,10 +17,17 @@ export default function Navbar() {
     }
   }, []);
 
+  // FIXED SEARCH FUNCTION ✔✔✔
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchTerm.trim() !== "") {
-      navigate(`/?company=${encodeURIComponent(searchTerm)}`);
+    const text = searchTerm.trim();
+
+    if (text === "") {
+      // empty search → show all cars
+      navigate("/home");
+    } else {
+      // search particular company
+      navigate(`/home?company=${encodeURIComponent(text)}`);
     }
   };
 
@@ -51,7 +58,8 @@ export default function Navbar() {
         </div>
 
         <div className="links">
-          <button className="link-btn"
+          <button
+            className="link-btn"
             onClick={() => {
               if (!user) alert("Please login first");
               else setShowBookings(true);
@@ -71,7 +79,9 @@ export default function Navbar() {
       </div>
 
       {/* BookingHistory Popup */}
-      {showBookings && <BookingHistory onClose={() => setShowBookings(false)} />}
+      {showBookings && (
+        <BookingHistory onClose={() => setShowBookings(false)} />
+      )}
     </>
   );
 }
