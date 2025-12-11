@@ -100,7 +100,7 @@ export default function BookingHistory({ onClose }) {
                     </td>
 
                     {/* ⭐ SHOW REJECT REASON */}
-                    <td style={{ color: "White", fontWeight: 500 }}>
+                    <td style={{ color: "black", fontWeight: 500 }}>
                       {b.rejectReason || "—"}
                     </td>
 

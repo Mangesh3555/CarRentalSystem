@@ -10,12 +10,12 @@ import Services from "../LandingAbout/Service/Services";
 export default function LandingPage() {
   const navigate = useNavigate();
 
-  const [activeForm, setActiveForm] = useState("user"); 
+  const [activeForm, setActiveForm] = useState("user");
   const [message, setMessage] = useState("");
 
   const [showAbout, setShowAbout] = useState(false);
-    const [showContact, setShowContact] = useState(false);
-    const [showServices, setShowServices] = useState(false);
+  const [showContact, setShowContact] = useState(false);
+  const [showServices, setShowServices] = useState(false);
 
   // User Login
   const [userLogin, setUserLogin] = useState({
@@ -38,46 +38,56 @@ export default function LandingPage() {
     address: "",
   });
 
+  // ⭐ STRONG PASSWORD VALIDATION FUNCTION (Only for users)
+  const validatePassword = (password) => {
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
   // -------------------------------
   // USER LOGIN HANDLER
   // -------------------------------
- // USER LOGIN HANDLER
-const handleUserLogin = async () => {
-  if (!userLogin.email || !userLogin.password) {
-    setMessage("Enter email and password");
-    return;
-  }
-
-  try {
-    const response = await axios.post(
-      "http://localhost:8081/users/login",
-      userLogin
-    );
-
-    if (response.data) {
-      // ⭐ Store full user object
-      localStorage.setItem("user", JSON.stringify(response.data));
-
-      navigate("/home");
-    } else {
-      setMessage("Invalid User Email or Password");
+  const handleUserLogin = async () => {
+    if (!userLogin.email || !userLogin.password) {
+      setMessage("Enter email and password");
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    setMessage("Login failed! Try again.");
-  }
-};
 
+    // ⭐ Password Format Check
+    if (!validatePassword(userLogin.password)) {
+      setMessage("Invalid password please try again!");
+      return;
+    }
 
+    try {
+      const response = await axios.post(
+        "http://localhost:8081/users/login",
+        userLogin
+      );
+
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        navigate("/home");
+      } else {
+        setMessage("Invalid User Email or Password");
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("Login failed! Try again.");
+    }
+  };
 
   // -------------------------------
-  // ADMIN LOGIN HANDLER
+  // ADMIN LOGIN HANDLER (VALIDATION REMOVED)
   // -------------------------------
   const handleAdminLogin = async () => {
     if (!adminLogin.adminemail || !adminLogin.password) {
       setMessage("Enter admin email and password");
       return;
     }
+
+    // ⭐ Removed admin password validation! (ALLOW ANY PASSWORD FORMAT)
 
     try {
       const response = await axios.post(
@@ -101,11 +111,20 @@ const handleUserLogin = async () => {
   // -------------------------------
   const handleUserRegister = async (e) => {
     e.preventDefault();
+
     for (let key in userRegister) {
       if (!userRegister[key]) {
         setMessage("All fields are required!");
         return;
       }
+    }
+
+    // ⭐ Registration Password Check
+    if (!validatePassword(userRegister.password)) {
+      setMessage(
+        "Password must be 8+ chars, include Uppercase, Lowercase, Number & Special character."
+      );
+      return;
     }
 
     try {
@@ -148,36 +167,26 @@ const handleUserLogin = async () => {
         <div className="logo">CaRs</div>
         <ul className="nav-links">
           <li><Link to="/">HOME</Link></li>
-           {/* ABOUT */}
+
           <li>
-            <button
-              className="nav-btn-link"
-              onClick={() => setShowAbout(true)}
-            >
+            <button className="nav-btn-link" onClick={() => setShowAbout(true)}>
               ABOUT
             </button>
           </li>
 
-          {/* 🔥 SERVICES BUTTON CHANGED TO OVERLAY (NOT LINK) */}
           <li>
-            <button
-              className="nav-btn-link"
-              onClick={() => setShowServices(true)}   // 🔥 ADDED
-            >
+            <button className="nav-btn-link" onClick={() => setShowServices(true)}>
               SERVICES
             </button>
           </li>
 
-          {/* CONTACT */}
           <li>
-            <button
-              className="nav-btn-link"
-              onClick={() => setShowContact(true)}
-            >
+            <button className="nav-btn-link" onClick={() => setShowContact(true)}>
               CONTACT
             </button>
           </li>
         </ul>
+
         <div className="nav-buttons">
           <button
             onClick={() => {
@@ -341,35 +350,36 @@ const handleUserLogin = async () => {
           )}
         </div>
       </div>
-        {/* ⭐ ABOUT US OVERLAY */}
-            {showAbout && (
-              <div className="overlay-about">
-                <AboutUs />
-                <button className="close-about" onClick={() => setShowAbout(false)}>
-                  HOME
-                </button>
-              </div>
-            )}
-      
-            {/* ⭐ CONTACT US OVERLAY */}
-            {showContact && (
-              <div className="overlay-about">
-                <ContactUs />
-                <button className="close-about" onClick={() => setShowContact(false)}>
-                  HOME
-                </button>
-              </div>
-            )}
-      
-            {/* ⭐🔥 SERVICES OVERLAY — NEWLY ADDED */}
-            {showServices && (
-              <div className="overlay-about">
-                <Services />   {/* 🔥 ADDED */}
-                <button className="close-about" onClick={() => setShowServices(false)}>
-                  HOME
-                </button>
-              </div>
-            )}
+
+      {/* ABOUT */}
+      {showAbout && (
+        <div className="overlay-about">
+          <AboutUs />
+          <button className="close-about" onClick={() => setShowAbout(false)}>
+            HOME
+          </button>
+        </div>
+      )}
+
+      {/* CONTACT */}
+      {showContact && (
+        <div className="overlay-about">
+          <ContactUs />
+          <button className="close-about" onClick={() => setShowContact(false)}>
+            HOME
+          </button>
+        </div>
+      )}
+
+      {/* SERVICES */}
+      {showServices && (
+        <div className="overlay-about">
+          <Services />
+          <button className="close-about" onClick={() => setShowServices(false)}>
+            HOME
+          </button>
+        </div>
+      )}
     </div>
   );
 }

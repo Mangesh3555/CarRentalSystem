@@ -13,6 +13,13 @@ export default function RegisterAdmin() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  // ⭐ STRONG PASSWORD VALIDATION
+  const validatePassword = (password) => {
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -20,12 +27,20 @@ export default function RegisterAdmin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation
+    // Basic empty check
     for (let key in form) {
       if (!form[key]) {
         setMessage("All fields are required!");
         return;
       }
+    }
+
+    // ⭐ Password Validation
+    if (!validatePassword(form.password)) {
+      setMessage(
+        "Password must be at least 8 characters, include Uppercase, Lowercase, Number & Special Character."
+      );
+      return;
     }
 
     try {
