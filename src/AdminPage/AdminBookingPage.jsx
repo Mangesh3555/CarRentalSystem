@@ -38,14 +38,14 @@ export default function AdminBookingPage() {
     }
   };
 
-  // ⭐ OPEN REASON POPUP ⭐
+  //  OPEN REASON POPUP 
   const openRejectPopup = (id) => {
     setSelectedBookingId(id);
     setRejectReason("");
     setShowReasonModal(true);
   };
 
-  // ⭐ SUBMIT REJECTION WITH REASON ⭐
+  //  SUBMIT REJECTION WITH REASON 
   const submitReject = async () => {
     if (!rejectReason.trim()) {
       alert("Please enter a reason!");
@@ -89,6 +89,7 @@ export default function AdminBookingPage() {
             <thead>
               <tr>
                 <th>Booking ID</th>
+                <th>Customer ID</th>
                 <th>Customer Name</th>
                 <th>Car Variant</th>
                 <th>Pickup Date</th>
@@ -104,6 +105,7 @@ export default function AdminBookingPage() {
               {bookings.map((b) => (
                 <tr key={b.bookingId}>
                   <td>{b.bookingId}</td>
+                  <td>{b.user?.userid || "N/A"}</td>
                   <td>{b.user?.name || "N/A"}</td>
                   <td>{b.carVariant || "N/A"}</td>
                   <td>{b.pickupDate}</td>
@@ -149,7 +151,7 @@ export default function AdminBookingPage() {
         </div>
       )}
 
-      {/* ⭐ REJECTION REASON POPUP ⭐ */}
+      {/*  REJECTION REASON POPUP  */}
       {showReasonModal && (
         <div className="reason-modal">
           <div className="reason-box">
@@ -175,3 +177,4 @@ export default function AdminBookingPage() {
     </div>
   );
 }
+ 

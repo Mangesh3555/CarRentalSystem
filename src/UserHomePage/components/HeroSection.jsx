@@ -16,18 +16,18 @@ export default function HeroSection({ companyFilter }) {
       .then((data) => {
         if (data.success) {
           setCars(data.data);
-          setFilteredCars(data.data); // 👈 DEFAULT show all cars
+          setFilteredCars(data.data);
         }
       })
       .catch((err) => console.error(err));
   }, []);
 
-  // Apply filter whenever companyFilter or cars changes
+  // Apply filter
   useEffect(() => {
     let trimmed = companyFilter.trim().toLowerCase();
 
     if (trimmed === "") {
-      setFilteredCars(cars); // 👈 Show ALL cars
+      setFilteredCars(cars);
     } else {
       const filtered = cars.filter((car) =>
         car.company.toLowerCase().includes(trimmed)
@@ -49,6 +49,9 @@ export default function HeroSection({ companyFilter }) {
     const [days, setDays] = useState(0);
     const [totalRent, setTotalRent] = useState(0);
     const [message, setMessage] = useState("");
+
+    // ✔ Prevent past dates
+    const today = new Date().toISOString().split("T")[0];
 
     useEffect(() => {
       if (pickupDate && returnDate) {
@@ -111,6 +114,7 @@ export default function HeroSection({ companyFilter }) {
         <input
           type="date"
           value={pickupDate}
+          min={today}     // ← 🚫 Cannot pick past dates
           onChange={(e) => setPickupDate(e.target.value)}
         />
 
@@ -118,6 +122,7 @@ export default function HeroSection({ companyFilter }) {
         <input
           type="date"
           value={returnDate}
+          min={pickupDate || today}   // ← 🚫 Cannot pick before pickup date
           onChange={(e) => setReturnDate(e.target.value)}
         />
 

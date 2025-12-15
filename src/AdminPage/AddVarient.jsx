@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./AddVarient.css";
 
 export default function AddVariant() {
-  const navigate = useNavigate(); // <-- Add navigate
+  const navigate = useNavigate(); 
   const [form, setForm] = useState({
     variantName: "",
     company: "",
@@ -18,7 +18,7 @@ export default function AddVariant() {
 
   const [message, setMessage] = useState("");
 
-  const companies = ["Hyundai", "Kia", "Toyota", "Honda"];
+  const companies = ["Hyundai", "Kia", "Toyota", "Honda","Maruti Suzuki"];
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -56,9 +56,7 @@ export default function AddVariant() {
       formData.append("ac", form.ac);
       formData.append("image", form.image);
 
-      const response = await axios.post(
-        "http://localhost:8081/api/cars/add",
-        formData,
+      const response = await axios.post("http://localhost:8081/api/cars/add",formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
@@ -90,7 +88,7 @@ export default function AddVariant() {
       {/* Close Button */}
       <button
         className="close-cross-btn"
-        onClick={() => navigate("/admindashboard")} // <-- change route if needed
+        onClick={() => navigate("/admindashboard")} 
         style={{
           position: "absolute",
           top: "10px",
@@ -154,3 +152,4 @@ export default function AddVariant() {
     </div>
   );
 }
+ 

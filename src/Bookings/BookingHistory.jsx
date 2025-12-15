@@ -67,7 +67,7 @@ export default function BookingHistory({ onClose }) {
                   <th>Total Days</th>
                   <th>Amount</th>
                   <th>Status</th>
-                  <th>Reject Reason</th> {/* ⭐ Added */}
+                  <th>Reject Reason</th> {/*  Added */}
                   <th>Action</th>
                 </tr>
               </thead>
@@ -99,7 +99,7 @@ export default function BookingHistory({ onClose }) {
                       {b.status}
                     </td>
 
-                    {/* ⭐ SHOW REJECT REASON */}
+                    {/*  SHOW REJECT REASON */}
                     <td style={{ color: "black", fontWeight: 500 }}>
                       {b.rejectReason || "—"}
                     </td>

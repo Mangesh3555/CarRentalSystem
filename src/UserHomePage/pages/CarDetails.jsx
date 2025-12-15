@@ -23,11 +23,11 @@ const CarDetails = () => {
     return <h2 style={{ color: "white", textAlign: "center" }}>Loading...</h2>;
 
   // -----------------------------
-  // 📌 BOOK NOW HANDLER
+  //  BOOK NOW HANDLER
   // -----------------------------
   const handleBooking = () => {
     navigate(`/book/${car.id}`, {
-      state: { car }, // passing full car object
+      state: { car }, 
     });
   };
 

@@ -31,7 +31,6 @@ export default function UserProfile() {
         }
       } catch (error) {
         console.error(error);
-        // fallback to localStorage data if backend fails
         setUser(userFromStorage || null);
         if (!userFromStorage) setMessage("Error fetching profile!");
       } finally {

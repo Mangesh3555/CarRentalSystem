@@ -7,9 +7,10 @@ export default function AdminDashboard() {
   const [search, setSearch] = useState("");
   const [carList, setCarList] = useState([]);
   const [filteredCars, setFilteredCars] = useState([]);
+  const [customers, setCustomers] = useState([]);
   const [bookings, setBookings] = useState([]);
   const navigate = useNavigate();
-
+ 
   // ---------------- FETCH ALL CARS ----------------
   useEffect(() => {
     axios
@@ -124,17 +125,17 @@ export default function AdminDashboard() {
 
         <div className="card">
           <h3>Total Customers</h3>
-          <p>85</p>
+          <p>5</p>
         </div>
 
         <div className="card">
           <h3>Total Bookings</h3>
-          <p>230</p>
+          <p>6</p>
         </div>
 
         <div className="card">
           <h3>Total Companies</h3>
-          <p>15</p>
+          <p>4</p>
         </div>
       </div>
     </div>

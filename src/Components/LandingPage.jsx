@@ -38,7 +38,7 @@ export default function LandingPage() {
     address: "",
   });
 
-  // ⭐ STRONG PASSWORD VALIDATION FUNCTION (Only for users)
+  //  STRONG PASSWORD VALIDATION FUNCTION (Only for users)
   const validatePassword = (password) => {
     const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -54,7 +54,7 @@ export default function LandingPage() {
       return;
     }
 
-    // ⭐ Password Format Check
+    //  Password Format Check
     if (!validatePassword(userLogin.password)) {
       setMessage("Invalid password please try again!");
       return;
@@ -79,16 +79,13 @@ export default function LandingPage() {
   };
 
   // -------------------------------
-  // ADMIN LOGIN HANDLER (VALIDATION REMOVED)
+  // ADMIN LOGIN HANDLER
   // -------------------------------
   const handleAdminLogin = async () => {
     if (!adminLogin.adminemail || !adminLogin.password) {
       setMessage("Enter admin email and password");
       return;
     }
-
-    // ⭐ Removed admin password validation! (ALLOW ANY PASSWORD FORMAT)
-
     try {
       const response = await axios.post(
         "http://localhost:8081/admin/login",
@@ -119,7 +116,7 @@ export default function LandingPage() {
       }
     }
 
-    // ⭐ Registration Password Check
+    //  Registration Password Check
     if (!validatePassword(userRegister.password)) {
       setMessage(
         "Password must be 8+ chars, include Uppercase, Lowercase, Number & Special character."

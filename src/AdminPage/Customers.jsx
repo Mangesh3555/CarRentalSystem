@@ -17,7 +17,6 @@ export default function Customers() {
   return (
     <div className="customer-container">
       
-      {/* ❌ Close icon */}
       <button className="close-btn" onClick={() => navigate("/admindashboard")}>
         ✕
       </button>
@@ -34,8 +33,11 @@ export default function Customers() {
                 <th>Booking ID</th>
                 <th>Car Name</th>
                 <th>Pickup Date</th>
+                <th>Customer ID</th>
                 <th>Customer Name</th>
                 <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Address</th>
               </tr>
             </thead>
 
@@ -45,8 +47,11 @@ export default function Customers() {
                   <td>{b.bookingId}</td>
                   <td>{b.car?.variantName || "N/A"}</td>
                   <td>{b.pickupDate}</td>
+                  <td>{b.user?.userid || "N/A"}</td>
                   <td>{b.user?.name || "N/A"}</td>
                   <td>{b.user?.email || "N/A"}</td>
+                  <td>{b.user?.phoneno || "N/A"}</td>
+                  <td>{b.user?.address || "N/A"}</td>
                 </tr>
               ))}
             </tbody>

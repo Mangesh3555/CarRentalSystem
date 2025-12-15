@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // ✅ import navigate
+import { useNavigate } from "react-router-dom"; 
 import "./Variant.css";
 
 export default function Variant() {
@@ -18,7 +18,7 @@ export default function Variant() {
     image: null
   });
 
-  const navigate = useNavigate(); // ✅ initialize navigate
+  const navigate = useNavigate();
 
   // Fetch all cars
   const fetchCars = async () => {
@@ -103,7 +103,7 @@ export default function Variant() {
 
   return (
     <div className="variant-container">
-      {/* ✅ Close button */}
+      {/* Close button */}
       <button
         className="close-cross-btn"
         onClick={() => navigate("/admindashboard")}
@@ -125,7 +125,7 @@ export default function Variant() {
             <th>Seats</th>
             <th>Rent/Day</th>
             <th>AC</th>
-            <th>Image</th>
+            {/* <th>Image</th> */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -176,13 +176,13 @@ export default function Variant() {
                   <td>{car.seatCapacity}</td>
                   <td>{car.rentPerDay}</td>
                   <td>{car.ac}</td>
-                  <td>
+                  {/* <td>
                     {car.image ? (
                       <img src={getImageSrc(car.image)} alt={car.variantName} className="variant-image" />
                     ) : (
                       "No Image"
                     )}
-                  </td>
+                  </td> */}
                   <td>
                     <button className="btn update" onClick={() => startEdit(car)}>Update</button>
                     <button className="btn delete" onClick={() => deleteCar(car.id)}>Delete</button>
